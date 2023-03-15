@@ -250,9 +250,9 @@ runs:
       uses: bitovi/github-actions-commons@commons
       with:
         # Action defaults
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
-        BITOPS_ENVIRONMENT: deployment
-        BITOPS_FAST_FAIL: true
+        #GITHUB_ACTION_PATH: ${{ github.action_path }}
+        #BITOPS_ENVIRONMENT: deployment
+        #BITOPS_FAST_FAIL: true
 
         # Action main inputs
         checkout: ${{ inputs.checkout }}
