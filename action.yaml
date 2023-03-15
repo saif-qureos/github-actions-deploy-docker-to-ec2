@@ -240,11 +240,10 @@ runs:
 #        $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
 
     - name: Invert boolean Variable
+      shell: bash
       id: set-cert
       if: ${{ inputs.no_cert == 'true' }}
       run: echo "::set-output name=enable_cert::false"
-      if: ${{ inputs.no_cert == 'false' }}
-      run: echo "::set-output name=enable_cert::true"
 
     - name: Deploy with BitOps
       id: deploy
