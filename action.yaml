@@ -173,71 +173,162 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Checkout if required
-      if: ${{ inputs.checkout == 'true' }}
-      uses: actions/checkout@v3
+#    - name: Checkout if required
+#      if: ${{ inputs.checkout == 'true' }}
+#      uses: actions/checkout@v3
+#
+#    - name: Deploy with BitOps
+#      id: deploy
+#      shell: bash
+#      env:
+#        GITHUB_ACTION_PATH: ${{ github.action_path }}
+#        BITOPS_ENVIRONMENT: deployment
+#        TERRAFORM_TARGETS: ${{ inputs.targets }}
+#        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
+#        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
+#        AWS_SESSION_TOKEN: ${{ inputs.aws_session_token }}
+#        AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
+#        AWS_AMI_ID: ${{ inputs.aws_ami_id }}
+#        TF_STATE_BUCKET: ${{ inputs.tf_state_bucket }}
+#        TF_STATE_BUCKET_DESTROY: ${{ inputs.tf_state_bucket_destroy }}
+#        REPO_ENV: ${{ inputs.repo_env }}
+#        GHS_ENV: ${{ inputs.dot_env }}
+#        GHV_ENV: ${{ inputs.ghv_env }}
+#        AWS_SECRET_ENV: ${{ inputs.aws_secret_env }}
+#        APP_PORT: ${{ inputs.app_port }}
+#        LB_PORT: ${{ inputs.lb_port }}
+#        LB_HEALTHCHECK: ${{ inputs.lb_healthcheck }}
+#        EC2_INSTANCE_PROFILE: ${{ inputs.ec2_instance_profile }}
+#        EC2_INSTANCE_TYPE: ${{ inputs.ec2_instance_type }}
+#        STACK_DESTROY: ${{ inputs.stack_destroy }}
+#        AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
+#        DOMAIN_NAME: ${{ inputs.domain_name }}
+#        SUB_DOMAIN: ${{ inputs.sub_domain }}
+#        ROOT_DOMAIN: ${{ inputs.root_domain }}
+#        CERT_ARN: ${{ inputs.cert_arn }}
+#        CREATE_ROOT_CERT: ${{ inputs.create_root_cert }}
+#        CREATE_SUB_CERT: ${{ inputs.create_sub_cert }}
+#        NO_CERT: ${{ inputs.no_cert }}
+#        BITOPS_FAST_FAIL: true
+#        APP_DIRECTORY: ${{ inputs.app_directory }}
+#        CREATE_KEYPAIR_SM_ENTRY: ${{ inputs.create_keypair_sm_entry }}
+#        ADDITIONAL_TAGS: ${{ inputs.additional_tags }}
+#        AWS_ENABLE_POSTGRES: ${{ inputs.aws_enable_postgres }}
+#        AWS_POSTGRES_ENGINE:  ${{ inputs.aws_postgres_engine }}
+#        AWS_POSTGRES_ENGINE_VERSION:  ${{ inputs.aws_postgres_engine_version }}
+#        AWS_POSTGRES_INSTANCE_CLASS: ${{ inputs.aws_postgres_instance_class }}
+#        AWS_POSTGRES_SUBNETS: ${{ inputs.aws_postgres_subnets }}
+#        AWS_POSTGRES_DATABASE_NAME: ${{ inputs.aws_postgres_database_name }}
+#        AWS_POSTGRES_DATABASE_PORT: ${{ inputs.aws_postgres_database_port}}
+#        AWS_CREATE_EFS: ${{ inputs.aws_create_efs }}
+#        AWS_CREATE_HA_EFS: ${{ inputs.aws_create_ha_efs }}
+#        AWS_CREATE_EFS_REPLICA: ${{ inputs.aws_create_efs_replica }}
+#        AWS_ENABLE_EFS_BACKUP_POLICY: ${{ inputs.aws_enable_efs_backup_policy }}
+#        AWS_EFS_ZONE_MAPPING: ${{ inputs.aws_efs_zone_mapping }}
+#        AWS_EFS_TRANSITION_TO_INACTIVE: ${{ inputs.aws_efs_transition_to_inactive }}
+#        AWS_EFS_REPLICA_DESTINATION: ${{ inputs.aws_replication_configuration_destination }}
+#        AWS_MOUNT_EFS_ID: ${{ inputs.aws_mount_efs_id }}
+#        AWS_MOUNT_EFS_SECURITY_GROUP_ID: ${{ inputs.aws_mount_efs_security_group_id }}
+#        APPLICATION_MOUNT_TARGET: ${{ inputs.application_mount_target }}
+#        EFS_MOUNT_TARGET: ${{ inputs.efs_mount_target }}
+#        DATA_MOUNT_TARGET: ${{ inputs.data_mount_target }}
+#
+#      run: |
+#        echo "running operations/_scripts/deploy/deploy.sh"
+#        $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
+#        echo "running operations/_scripts/deploy/export_vars.sh"
+#        $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
+
+    - name: Invert boolean Variable
+      id: set-cert
+      if: ${{ inputs.no_cert == 'true' }}
+      run: echo "::set-output name=enable_cert::false"
+      if: ${{ inputs.no_cert == 'false' }}
+      run: echo "::set-output name=enable_cert::true"
 
     - name: Deploy with BitOps
       id: deploy
-      shell: bash
-      env:
+      uses: bitovi/github-actions-commons@commons
+      with:
+        # Action defaults
         GITHUB_ACTION_PATH: ${{ github.action_path }}
         BITOPS_ENVIRONMENT: deployment
-        TERRAFORM_TARGETS: ${{ inputs.targets }}
-        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key_id }}
-        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_access_key }}
-        AWS_SESSION_TOKEN: ${{ inputs.aws_session_token }}
-        AWS_DEFAULT_REGION: ${{ inputs.aws_default_region }}
-        AWS_AMI_ID: ${{ inputs.aws_ami_id }}
-        TF_STATE_BUCKET: ${{ inputs.tf_state_bucket }}
-        TF_STATE_BUCKET_DESTROY: ${{ inputs.tf_state_bucket_destroy }}
-        REPO_ENV: ${{ inputs.repo_env }}
-        GHS_ENV: ${{ inputs.dot_env }}
-        GHV_ENV: ${{ inputs.ghv_env }}
-        AWS_SECRET_ENV: ${{ inputs.aws_secret_env }}
-        APP_PORT: ${{ inputs.app_port }}
-        LB_PORT: ${{ inputs.lb_port }}
-        LB_HEALTHCHECK: ${{ inputs.lb_healthcheck }}
-        EC2_INSTANCE_PROFILE: ${{ inputs.ec2_instance_profile }}
-        EC2_INSTANCE_TYPE: ${{ inputs.ec2_instance_type }}
-        STACK_DESTROY: ${{ inputs.stack_destroy }}
-        AWS_RESOURCE_IDENTIFIER: ${{ inputs.aws_resource_identifier }}
-        DOMAIN_NAME: ${{ inputs.domain_name }}
-        SUB_DOMAIN: ${{ inputs.sub_domain }}
-        ROOT_DOMAIN: ${{ inputs.root_domain }}
-        CERT_ARN: ${{ inputs.cert_arn }}
-        CREATE_ROOT_CERT: ${{ inputs.create_root_cert }}
-        CREATE_SUB_CERT: ${{ inputs.create_sub_cert }}
-        NO_CERT: ${{ inputs.no_cert }}
         BITOPS_FAST_FAIL: true
-        APP_DIRECTORY: ${{ inputs.app_directory }}
-        CREATE_KEYPAIR_SM_ENTRY: ${{ inputs.create_keypair_sm_entry }}
-        ADDITIONAL_TAGS: ${{ inputs.additional_tags }}
-        AWS_ENABLE_POSTGRES: ${{ inputs.aws_enable_postgres }}
-        AWS_POSTGRES_ENGINE:  ${{ inputs.aws_postgres_engine }}
-        AWS_POSTGRES_ENGINE_VERSION:  ${{ inputs.aws_postgres_engine_version }}
-        AWS_POSTGRES_INSTANCE_CLASS: ${{ inputs.aws_postgres_instance_class }}
-        AWS_POSTGRES_SUBNETS: ${{ inputs.aws_postgres_subnets }}
-        AWS_POSTGRES_DATABASE_NAME: ${{ inputs.aws_postgres_database_name }}
-        AWS_POSTGRES_DATABASE_PORT: ${{ inputs.aws_postgres_database_port}}
-        AWS_CREATE_EFS: ${{ inputs.aws_create_efs }}
-        AWS_CREATE_HA_EFS: ${{ inputs.aws_create_ha_efs }}
-        AWS_CREATE_EFS_REPLICA: ${{ inputs.aws_create_efs_replica }}
-        AWS_ENABLE_EFS_BACKUP_POLICY: ${{ inputs.aws_enable_efs_backup_policy }}
-        AWS_EFS_ZONE_MAPPING: ${{ inputs.aws_efs_zone_mapping }}
-        AWS_EFS_TRANSITION_TO_INACTIVE: ${{ inputs.aws_efs_transition_to_inactive }}
-        AWS_EFS_REPLICA_DESTINATION: ${{ inputs.aws_replication_configuration_destination }}
-        AWS_MOUNT_EFS_ID: ${{ inputs.aws_mount_efs_id }}
-        AWS_MOUNT_EFS_SECURITY_GROUP_ID: ${{ inputs.aws_mount_efs_security_group_id }}
-        APPLICATION_MOUNT_TARGET: ${{ inputs.application_mount_target }}
-        EFS_MOUNT_TARGET: ${{ inputs.efs_mount_target }}
-        DATA_MOUNT_TARGET: ${{ inputs.data_mount_target }}
 
-      run: |
-        echo "running operations/_scripts/deploy/deploy.sh"
-        $GITHUB_ACTION_PATH/operations/_scripts/deploy/deploy.sh
-        echo "running operations/_scripts/deploy/export_vars.sh"
-        $GITHUB_ACTION_PATH/operations/_scripts/deploy/export_vars.sh
+        # Action main inputs
+        checkout: ${{ inputs.checkout }}
+        tf_stack_destroy: ${{ inputs.stack_destroy }}
+        tf_state_bucket: ${{ inputs.tf_state_bucket }}
+        tf_state_bucket_destroy: ${{ inputs.tf_state_bucket_destroy }}
+        tf_state_bucket_provider: 'aws'
+        tf_targets: ${{ inputs.targets }}
+
+
+        # AWS
+        aws_access_key_id: ${{ inputs.aws_access_key_id }}
+        aws_secret_access_key: ${{ inputs.aws_secret_access_key }}
+        aws_session_token: ${{ inputs.aws_session_token }}
+        aws_default_region: ${{ inputs.aws_default_region }}
+        aws_resource_identifier: ${{ inputs.aws_resource_identifier }}
+        aws_additional_tags: ${{ inputs.additional_tags }}
+
+        # ENV
+        env_aws_secret: ${{ inputs.aws_secret_env }}
+        env_repo: ${{ inputs.repo_env }}
+        env_ghs: ${{ inputs.dot_env }}
+        env_ghv: ${{ inputs.ghv_env }}
+
+        # EC2
+        aws_ec2_instance_create: true
+        aws_ec2_ami_id: ${{ inputs.aws_ami_id }}
+        aws_ec2_iam_instance_profile: ${{ inputs.ec2_instance_profile }}
+        aws_ec2_instance_type: ${{ inputs.ec2_instance_type }}
+        aws_ec2_create_keypair_sm: ${{ inputs.create_keypair_sm_entry }}
+        aws_ec2_instance_public_ip: true
+
+        # AWS Route53 Domains abd Certificates
+        aws_r53_enable: true
+        aws_r53_domain_name: ${{ inputs.domain_name }}
+        aws_r53_sub_domain_name: ${{ inputs.sub_domain }}
+        aws_r53_root_domain_deploy: ${{ inputs.root_domain }}
+        aws_r53_enable_cert: ${{ !steps.set-cert.outputs.enable_cert }}
+        aws_r53_cert_arn: ${{ inputs.cert_arn }}
+        aws_r53_create_root_cert: ${{ inputs.create_root_cert }}
+        aws_r53_create_sub_cert: ${{ inputs.create_sub_cert }}
+
+        # AWS ELB
+        aws_elb_create: true
+        aws_elb_app_port: ${{ inputs.app_port }}
+        aws_elb_listen_port: ${{ inputs.lb_port }}
+        aws_elb_healthcheck: ${{ inputs.lb_healthcheck }}
+
+        # AWS EFS
+        aws_efs_create: ${{ inputs.aws_create_efs }}
+        aws_efs_create_ha: ${{ inputs.aws_create_ha_efs }}
+        aws_efs_create_replica: ${{ inputs.aws_create_efs_replica }}
+        aws_efs_enable_backup_policy: ${{ inputs.aws_enable_efs_backup_policy }}
+        aws_efs_zone_mapping: ${{ inputs.aws_efs_zone_mapping }}
+        aws_efs_transition_to_inactive: ${{ inputs.aws_efs_transition_to_inactive }}
+        aws_efs_replication_destination: ${{ inputs.aws_replication_configuration_destination }}
+        aws_efs_mount_id: ${{ inputs.aws_mount_efs_id }}
+        aws_efs_mount_security_group_id: ${{ inputs.aws_mount_efs_security_group_id }}
+        aws_efs_ec2_mount_point: ${{ inputs.application_mount_target }}
+        aws_efs_mount_target: ${{ inputs.efs_mount_target }}
+
+        # POSTGRES
+        aws_postgres_enable: ${{ inputs.aws_enable_postgres }}
+        aws_postgres_engine:  ${{ inputs.aws_postgres_engine }}
+        aws_postgres_engine_version:  ${{ inputs.aws_postgres_engine_version }}
+        aws_postgres_instance_class: ${{ inputs.aws_postgres_instance_class }}
+        aws_postgres_subnets: ${{ inputs.aws_postgres_subnets }}
+        aws_postgres_database_name: ${{ inputs.aws_postgres_database_name }}
+        aws_postgres_database_port: ${{ inputs.aws_postgres_database_port}}
+
+        # DOCKER
+        docker_install: true
+        docker_repo_app_directory: ${{ inputs.app_directory }}
+        docker_efs_mount_target: ${{ inputs.data_mount_target }}
+
 
     # output results to GitHub
     - if: ${{ success() && steps.deploy.outputs.vm_url != '' }}
