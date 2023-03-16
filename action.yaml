@@ -178,7 +178,7 @@ runs:
       shell: bash
       id: set-cert
       if: ${{ inputs.no_cert == 'false' }}
-      run: echo "::set-output name=enable_cert::true"
+      run: echo "enable_cert=true" >> $GITHUB_OUTPUT
 
     - name: Deploy with BitOps
       id: deploy
@@ -220,7 +220,7 @@ runs:
         aws_r53_domain_name: ${{ inputs.domain_name }}
         aws_r53_sub_domain_name: ${{ inputs.sub_domain }}
         aws_r53_root_domain_deploy: ${{ inputs.root_domain }}
-        aws_r53_enable_cert: ${{ !steps.set-cert.outputs.enable_cert }}
+        aws_r53_enable_cert: ${{ steps.set-cert.outputs.enable_cert }}
         aws_r53_cert_arn: ${{ inputs.cert_arn }}
         aws_r53_create_root_cert: ${{ inputs.create_root_cert }}
         aws_r53_create_sub_cert: ${{ inputs.create_sub_cert }}
