@@ -118,6 +118,7 @@ inputs:
   no_cert:
     description: 'Makes the application not to use a certificate by disabling certificate lookup.'
     required: false
+    default: false
     
   # Terraform
   targets:
@@ -176,10 +177,8 @@ runs:
     - name: Invert boolean Variable
       shell: bash
       id: set-cert
-      if: ${{ inputs.no_cert == 'true' }}
-      run: echo "::set-output name=enable_cert::false"
-      else:
-        run: echo "::set-output name=enable_cert::true"
+      if: ${{ inputs.no_cert == 'false' }}
+      run: echo "::set-output name=enable_cert::true"
 
     - name: Deploy with BitOps
       id: deploy
