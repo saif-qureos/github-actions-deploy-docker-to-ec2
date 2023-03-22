@@ -216,7 +216,7 @@ runs:
         aws_ec2_instance_public_ip: true
 
         # AWS Route53 Domains abd Certificates
-        aws_r53_enable_cert: true
+        aws_r53_enable: true
         aws_r53_domain_name: ${{ inputs.domain_name }}
         aws_r53_sub_domain_name: ${{ inputs.sub_domain }}
         aws_r53_root_domain_deploy: ${{ inputs.root_domain }}
