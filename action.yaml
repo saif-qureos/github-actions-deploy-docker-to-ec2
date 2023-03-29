@@ -71,6 +71,7 @@ inputs:
     description: 'The AWS IAM instance profile to use for the EC2 instance'
   ec2_instance_type: 
     description: 'The AWS Instance type'
+    default: t2.small
     required: false
   
   # EFS
@@ -184,6 +185,9 @@ runs:
       id: deploy
       uses: bitovi/github-actions-commons@commons
       with:
+        # Current repo vars
+        calling_repo: ${{ github.server_url }}${{ github.repository }}
+
         # Action main inputs
         checkout: ${{ inputs.checkout }}
         tf_stack_destroy: ${{ inputs.stack_destroy }}
