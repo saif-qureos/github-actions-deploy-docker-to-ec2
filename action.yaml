@@ -185,22 +185,37 @@ runs:
     - name: Dump GitHub context
       shell: bash
       id: github_context_step
-      run: echo '${{ toJSON(github) }}'
+      run: echo 'GITHUB --> ${{ toJSON(github) }}'
+    - name: Dump env context
+      shell: bash
+      run: echo 'ENV --> ${{ toJSON(env) }}'
+    - name: Dump vars context
+      shell: bash
+      run: echo 'VARS --> ${{ toJSON(vars) }}'
     - name: Dump job context
       shell: bash
-      run: echo '${{ toJSON(job) }}'
+      run: echo 'JOB --> ${{ toJSON(job) }}'
+    - name: Dump jobs context
+      shell: bash
+      run: echo 'JOBS --> ${{ toJSON(jobs) }}'
     - name: Dump steps context
       shell: bash
-      run: echo '${{ toJSON(steps) }}'
+      run: echo 'STEPS --> ${{ toJSON(steps) }}'
     - name: Dump runner context
       shell: bash
-      run: echo '${{ toJSON(runner) }}'
+      run: echo 'RUNNER --> ${{ toJSON(runner) }}'
     - name: Dump strategy context
       shell: bash
-      run: echo '${{ toJSON(strategy) }}'
+      run: echo 'STRATEGY --> ${{ toJSON(strategy) }}'
     - name: Dump matrix context
       shell: bash
-      run: echo '${{ toJSON(matrix) }}'
+      run: echo 'MATRIX --> ${{ toJSON(matrix) }}'
+    - name: Dump needs context
+      shell: bash
+      run: echo 'NEEDS --> ${{ toJSON(needs) }}'
+    - name: Dump inputs context
+      shell: bash
+      run: echo 'INPUTS --> ${{ toJSON(inputs) }}'
       
       
         
