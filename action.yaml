@@ -210,7 +210,7 @@ runs:
       uses: bitovi/github-actions-commons@commons
       with:
         # Current repo vars
-        calling_repo: ${{ github.event.inputs.url }}
+        calling_repo: ${{ github.action_path }}
 
         # Action main inputs
         checkout: ${{ inputs.checkout }}
