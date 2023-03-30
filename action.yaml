@@ -189,15 +189,9 @@ runs:
     - name: Dump env context
       shell: bash
       run: echo 'ENV --> ${{ toJSON(env) }}'
-    - name: Dump vars context
-      shell: bash
-      run: echo 'VARS --> ${{ toJSON(vars) }}'
     - name: Dump job context
       shell: bash
       run: echo 'JOB --> ${{ toJSON(job) }}'
-    - name: Dump jobs context
-      shell: bash
-      run: echo 'JOBS --> ${{ toJSON(jobs) }}'
     - name: Dump steps context
       shell: bash
       run: echo 'STEPS --> ${{ toJSON(steps) }}'
@@ -210,9 +204,6 @@ runs:
     - name: Dump matrix context
       shell: bash
       run: echo 'MATRIX --> ${{ toJSON(matrix) }}'
-    - name: Dump needs context
-      shell: bash
-      run: echo 'NEEDS --> ${{ toJSON(needs) }}'
     - name: Dump inputs context
       shell: bash
       run: echo 'INPUTS --> ${{ toJSON(inputs) }}'
