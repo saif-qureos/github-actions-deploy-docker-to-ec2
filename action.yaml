@@ -200,6 +200,8 @@ runs:
     - name: Dump matrix context
       shell: bash
       run: echo '${{ toJSON(matrix) }}'
+      
+      
         
         
     - name: Deploy with BitOps
@@ -207,7 +209,7 @@ runs:
       uses: bitovi/github-actions-commons@commons
       with:
         # Current repo vars
-        calling_repo: ${{ github.server_url }}${{ github.repository }}
+        calling_repo: ${{ github.event.inputs.url }}
 
         # Action main inputs
         checkout: ${{ inputs.checkout }}
