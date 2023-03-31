@@ -181,39 +181,11 @@ runs:
       id: set-cert
       if: ${{ inputs.no_cert == 'false' }}
       run: echo "enable_cert=true" >> $GITHUB_OUTPUT
-
-    - name: Dump GitHub context
-      shell: bash
-      id: github_context_step
-      run: echo 'GITHUB --> ${{ toJSON(github) }}'
-    - name: Dump env context
-      shell: bash
-      run: echo 'ENV --> ${{ toJSON(env) }}'
-    - name: Dump job context
-      shell: bash
-      run: echo 'JOB --> ${{ toJSON(job) }}'
-    - name: Dump steps context
-      shell: bash
-      run: echo 'STEPS --> ${{ toJSON(steps) }}'
-    - name: Dump runner context
-      shell: bash
-      run: echo 'RUNNER --> ${{ toJSON(runner) }}'
-    - name: Dump strategy context
-      shell: bash
-      run: echo 'STRATEGY --> ${{ toJSON(strategy) }}'
-    - name: Dump matrix context
-      shell: bash
-      run: echo 'MATRIX --> ${{ toJSON(matrix) }}'
-    - name: Dump inputs context
-      shell: bash
-      run: echo 'INPUTS --> ${{ toJSON(inputs) }}'
       
       
-        
-        
     - name: Deploy with BitOps
       id: deploy
-      uses: bitovi/github-actions-commons@commons
+      uses: bitovi/github-actions-commons@main
       with:
         # Current repo vars
         calling_repo: ${{ github.action_path }}
