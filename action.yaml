@@ -185,7 +185,7 @@ runs:
       
     - name: Deploy with BitOps
       id: deploy
-      uses: bitovi/github-actions-commons@main
+      uses: bitovi/github-actions-commons@9-efs-unmount
       with:
         # Current repo vars
         calling_repo: ${{ github.action_path }}
