@@ -185,7 +185,7 @@ runs:
       
     - name: Deploy with BitOps
       id: deploy
-      uses: bitovi/github-actions-commons@g11-add-option-to-specify-ami-id
+      uses: bitovi/github-actions-commons@11-add-option-to-specify-ami-id
       with:
         # Current repo vars
         calling_repo: ${{ github.action_path }}
