@@ -192,7 +192,7 @@ runs:
       uses: bitovi/github-actions-commons@13-add-support-to-add-terraform-ansible-code
       with:
         # Current repo vars
-        calling_repo: ${{ github.action_path }}
+        gh_calling_repo: ${{ github.action_path }}
 
         # Action main inputs
         checkout: ${{ inputs.checkout }}
