@@ -74,6 +74,10 @@ inputs:
     description: 'The AWS Instance type'
     default: t2.small
     required: false
+  ec2_volume_size: 
+    description: 'The size of the volume (in GB) on the AWS Instance'
+    required: false
+    default: "8"
   
   # EFS
   aws_create_efs:
@@ -220,6 +224,7 @@ runs:
         aws_ec2_ami_id: ${{ inputs.aws_ami_id }}
         aws_ec2_iam_instance_profile: ${{ inputs.ec2_instance_profile }}
         aws_ec2_instance_type: ${{ inputs.ec2_instance_type }}
+        aws_ec2_instance_root_vol_size: ${{ inputs.ec2_volume_size }}
         aws_ec2_create_keypair_sm: ${{ inputs.create_keypair_sm_entry }}
         aws_ec2_instance_public_ip: true
 
