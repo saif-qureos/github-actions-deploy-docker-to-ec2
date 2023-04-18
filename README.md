@@ -160,6 +160,7 @@ The following inputs can be used as `step.with` keys
 | `aws_ec2_ami_update` | Boolean | Set this to `true` if you want to recreate the EC2 instance if there is a newer version of the AMI. Defaults to `false`.|
 | `ec2_instance_profile` | String | The AWS IAM instance profile to use for the EC2 instance. Default is `${GITHUB_ORG_NAME}-${GITHUB_REPO_NAME}-${GITHUB_BRANCH_NAME}`|
 | `ec2_instance_type` | String | The AWS IAM instance type to use. Default is `t2.small`. See [this list](https://aws.amazon.com/ec2/instance-types/) for reference. |
+| `ec2_instance_protect` | Boolean | Set this to true to enable instance deletion protection. Defaults to `false`. |
 | `ec2_volume_size` | Integer | The size of the volume (in GiB) on the AWS Instance. Defaults to `8`. |
 | `create_keypair_sm_entry` | Boolean | Generates and manage a secret manager entry that contains the public and private keys created for the ec2 instance. |
 <hr/>
