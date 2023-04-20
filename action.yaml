@@ -94,6 +94,9 @@ inputs:
     description: Toggle to indiciate whether a read-only replica should be created for the EFS primary file system
   aws_enable_efs_backup_policy:
     description: Toggle to indiciate whether the EFS should have a backup policy, default is `false`
+  aws_efs_volume_preserve:
+    description: 'Set this to true to avoid deletion of EFS volume on termination. Defaults to false.'
+    required: false
   aws_efs_zone_mapping:
     description: Information on Zone Mapping can be found in the [README.md](README.md#efs-zone-mapping)
   aws_efs_transition_to_inactive:
