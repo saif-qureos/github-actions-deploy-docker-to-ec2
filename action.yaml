@@ -79,7 +79,6 @@ inputs:
     description: 'The AWS IAM instance profile to use for the EC2 instance'
   ec2_instance_type: 
     description: 'The AWS Instance type'
-    default: t2.small
     required: false
   ec2_instance_protect:
     description: 'Set this to true to enable instance deletion protection.'
