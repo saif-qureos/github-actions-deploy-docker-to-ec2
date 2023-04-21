@@ -9,6 +9,10 @@ inputs:
     description: 'Specifies if this action should checkout the code'
     required: false
     default: 'true'
+  bitops_code_store:
+    description: 'Store BitOps code as a GitHub artifact'
+    required: false
+    default: false
   
   # AWS
   aws_access_key_id:
@@ -208,6 +212,7 @@ runs:
       with:
         # Current repo vars
         gh_action_repo: ${{ github.action_path }}
+        bitops_code_store: ${{ inputs.bitops_code_store }}
 
         # Action main inputs
         checkout: ${{ inputs.checkout }}
