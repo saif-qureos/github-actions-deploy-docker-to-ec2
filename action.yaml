@@ -210,7 +210,7 @@ runs:
       
     - name: Deploy with BitOps
       id: deploy
-      uses: bitovi/github-actions-commons@13-add-support-to-add-terraform-ansible-code
+      uses: bitovi/github-actions-commons@main
       with:
         # Current repo vars
         gh_action_repo: ${{ github.action_path }}
