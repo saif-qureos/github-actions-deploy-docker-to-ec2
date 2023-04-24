@@ -134,6 +134,7 @@ The following inputs can be used as `step.with` keys
 | Name             | Type    | Description                        |
 |------------------|---------|------------------------------------|
 | `checkout` | Boolean | Set to `false` if the code is already checked out. (Default is `true`). |
+| `bitops_code_only` | Boolean | If `true`, will run only the generation phase of BitOps, where the Terraform and Ansible code is built. |
 | `bitops_code_store` | Boolean | Set to `true` to create a GitHub artifact with the BitOps generated code. Contains all Terraform and Ansible code. |
 | `stack_destroy` | Boolean  | Set to `true` to destroy the stack - Will delete the `elb logs bucket` after the destroy action runs. |
 | `aws_access_key_id` | String | AWS access key ID |
