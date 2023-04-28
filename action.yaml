@@ -17,6 +17,39 @@ inputs:
     required: false
     default: false
   
+  # GitHub Deployment repo inputs
+  gh_deployment_input_terraform:
+    description: 'Folder to store Terraform files to be included during Terraform execution.'
+    required: false
+  gh_deployment_input_ansible:
+    description: 'Folder where a whole Ansible structure is expected. If missing bitops.config.yaml a default will be generated.'
+    required: false
+  gh_deployment_input_ansible_playbook:
+    description: 'Main playbook to be looked for.'
+    default: playbook.yml
+    required: false
+  gh_deployment_input_ansible_extra_vars_file:
+    description: "Relative path to file from project root to Ansible vars file to be applied. "
+    required: false
+  gh_deployment_action_input_ansible_extra_vars_file:
+    description: "Relative path to file from project root to Ansible vars file to be applied into the Action Ansible execution. "
+    required: false
+
+  # GitHub Action repo inputs
+  gh_action_repo:
+    description: 'URL of calling repo'
+    required: false
+  gh_action_input_terraform:
+    description: 'Folder to store Terraform files to be included during Terraform execution.'
+    required: false
+  gh_action_input_ansible:
+    description: 'Folder where a whole Ansible structure is expected. If missing bitops.config.yaml a default will be generated.'
+    required: false
+  gh_action_input_ansible_playbook:
+    description: 'Main playbook to be looked for.'
+    default: playbook.yml
+    required: false
+  
   # AWS
   aws_access_key_id:
     description: 'AWS access key ID'
@@ -214,8 +247,22 @@ runs:
       with:
         # Current repo vars
         gh_action_repo: ${{ github.action_path }}
+
         bitops_code_only: ${{ inputs.bitops_code_only }}
         bitops_code_store: ${{ inputs.bitops_code_store }}
+
+        # Deployment repo
+        gh_deployment_input_terraform: ${{ inputs.gh_deployment_input_terraform }}
+        gh_deployment_input_ansible: ${{ inputs.gh_deployment_input_ansible }}
+        gh_deployment_input_ansible_playbook: ${{ inputs.gh_deployment_input_ansible_playbook }}
+        gh_deployment_input_ansible_extra_vars_file: ${{ inputs.gh_deployment_input_ansible_extra_vars_file }}
+        gh_deployment_action_input_ansible_extra_vars_file: ${{ inputs.gh_deployment_action_input_ansible_extra_vars_file }}
+        
+        # Action repo
+        gh_action_input_terraform: ${{ inputs.gh_action_input_terraform }}
+        gh_action_input_ansible: ${{ inputs.gh_action_input_ansible }}
+        gh_action_input_ansible_playbook: ${{ inputs.gh_action_input_ansible_playbook }}
+
 
         # Action main inputs
         checkout: ${{ inputs.checkout }}

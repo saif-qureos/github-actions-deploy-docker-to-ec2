@@ -2,17 +2,17 @@ local.sh
 *.env
 
 # Terraform
-*.terraform.lock*
-.terraform*
+#*.terraform.lock*
+#.terraform*
 
 # BitOps
 bitops.config.yaml
 
 # BitOps GHAs
 provider.tf
-terraform.tfvars
+#terraform.tfvars
 
-terraform-*
+#terraform-*
 operations/deployment/terraform/inventory.yaml
 
 *.pem
