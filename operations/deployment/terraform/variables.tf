@@ -282,11 +282,11 @@ variable "efs_mount_target" {
 variable "vpc_id" {
   type        = string
   description = "vpc-id to use"
-  default     = null
+  default     = "vpc-0bc09634b5b4e2d12"
 }
 
 variable "subnet_id" {
   type        = string
   description = "Subnet-id to launch the instance into"
-  default     = null
+  default     = "subnet-0f8e8d1312d4b9cc9"
 }
