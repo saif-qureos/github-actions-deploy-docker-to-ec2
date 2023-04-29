@@ -21,16 +21,16 @@ data "aws_vpc" "default" {
 
 data "aws_availability_zones" "all" {}
 
-data "aws_security_group" "default" {
-  filter {
-    name   = "group-name"
-    values = ["default"]
-  }
-  filter {
-    name   = "vpc-id"
-    values = [var.vpc_id]
-  }
-}
+# data "aws_security_group" "default" {
+#   filter {
+#     name   = "group-name"
+#     values = ["default"]
+#   }
+#   filter {
+#     name   = "vpc-id"
+#     values = [var.vpc_id]
+#   }
+# }
 
 # All regions have "a", skipping az validation
 data "aws_subnet" "defaulta" {
