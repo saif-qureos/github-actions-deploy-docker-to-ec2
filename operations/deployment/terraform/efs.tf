@@ -8,36 +8,36 @@ locals {
   auto_ha_availability_zonea = {
     "${data.aws_region.current.name}a" : {
       "subnet_id" : data.aws_subnet.defaulta.id,
-      "security_groups" : [subnet-0f8e8d1312d4b9cc9]
+      "security_groups" : ["subnet-0f8e8d1312d4b9cc9"]
   } }
   auto_ha_availability_zoneb = length(data.aws_subnet.defaultb) > 0 ? ({
     "${data.aws_region.current.name}b" : {
       "subnet_id" : data.aws_subnet.defaultb[0].id,
-      "security_groups" : [subnet-0f8e8d1312d4b9cc9]
+      "security_groups" : ["subnet-0f8e8d1312d4b9cc9"]
     }
   }) : null
   auto_ha_availability_zonec = length(data.aws_subnet.defaultc) > 0 ? ({
     "${data.aws_region.current.name}c" : {
       "subnet_id" : data.aws_subnet.defaultc[0].id,
-      "security_groups" : [subnet-0f8e8d1312d4b9cc9]
+      "security_groups" : ["subnet-0f8e8d1312d4b9cc9"]
     }
   }) : null
   auto_ha_availability_zoned = length(data.aws_subnet.defaultd) > 0 ? ({
     "${data.aws_region.current.name}d" : {
       "subnet_id" : data.aws_subnet.defaultd[0].id,
-      "security_groups" : [subnet-0f8e8d1312d4b9cc9]
+      "security_groups" : ["subnet-0f8e8d1312d4b9cc9"]
     }
   }) : null
   auto_ha_availability_zonee = length(data.aws_subnet.defaulte) > 0 ? ({
     "${data.aws_region.current.name}e" : {
       "subnet_id" : data.aws_subnet.defaulte[0].id,
-      "security_groups" : [subnet-0f8e8d1312d4b9cc9]
+      "security_groups" : ["subnet-0f8e8d1312d4b9cc9"]
     }
   }) : null
   auto_ha_availability_zonef = length(data.aws_subnet.defaultf) > 0 ? ({
     "${data.aws_region.current.name}f" : {
       "subnet_id" : data.aws_subnet.defaultf[0].id,
-      "security_groups" : [subnet-0f8e8d1312d4b9cc9]
+      "security_groups" : ["subnet-0f8e8d1312d4b9cc9"]
     }
   }) : null
   # ha_zone_mapping: Creates a zone mapping object list for all available AZs in a region
