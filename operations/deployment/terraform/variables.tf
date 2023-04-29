@@ -278,3 +278,15 @@ variable "efs_mount_target" {
   description = "Directory path in efs to mount to"
   default     = null
 }
+
+variable "vpc_id" {
+  type        = string
+  description = "vpc-id to use"
+  default     = null
+}
+
+variable "subnet_id" {
+  type        = string
+  description = "Subnet-id to launch the instance into"
+  default     = null
+}

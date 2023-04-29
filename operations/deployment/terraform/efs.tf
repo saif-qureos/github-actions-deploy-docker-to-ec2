@@ -79,7 +79,7 @@ resource "aws_efs_file_system" "efs" {
 resource "aws_security_group" "efs_security_group" {
   count  = local.create_efs ? 1 : 0
   name   = "${var.aws_resource_identifier}-security-group"
-  vpc_id = data.aws_vpc.default.id
+  vpc_id = var.vpc_id
 
   ingress {
     description = "TLS from VPC"

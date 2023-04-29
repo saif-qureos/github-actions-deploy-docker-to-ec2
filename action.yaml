@@ -76,6 +76,12 @@ inputs:
     description: 'The size of the volume (in GB) on the AWS Instance'
     required: false
     default: "8"
+  vpc_id: 
+    description: 'The size of the volume (in GB) on the AWS Instance'
+    required: true
+  subnet_id: 
+    description: 'Subnet to launch ec2 instance into'
+    required: true
 
   
   # EFS

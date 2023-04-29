@@ -59,7 +59,7 @@ resource "aws_instance" "server" {
   # ubuntu
   ami                         = var.aws_ami_id != "" ? var.aws_ami_id : data.aws_ami.ubuntu.id
   availability_zone           = local.preferred_az
-  subnet_id                   = data.aws_subnet.selected[0].id
+  subnet_id                   = var.subnet_id
   instance_type               = var.ec2_instance_type
   associate_public_ip_address = var.ec2_instance_public_ip
   vpc_security_group_ids      = [aws_security_group.ec2_security_group.id]

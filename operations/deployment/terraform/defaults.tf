@@ -3,8 +3,8 @@ data "aws_subnets" "vpc_subnets" {
     name   = "vpc-id"
 
     # todo: support a specified vpc id
-    # values = [var.vpc_id ? var.vpc_id : data.aws_vpc.default.id]
-    values = [data.aws_vpc.default.id]
+    # values = [var.vpc_id ? var.vpc_id : var.vpc_id]
+    values = [var.vpc_id]
   }
 }
 
@@ -28,7 +28,7 @@ data "aws_security_group" "default" {
   }
   filter {
     name   = "vpc-id"
-    values = [data.aws_vpc.default.id]
+    values = [var.vpc_id]
   }
 }
 
