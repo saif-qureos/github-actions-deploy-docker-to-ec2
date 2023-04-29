@@ -242,7 +242,7 @@ variable "aws_replication_configuration_destination" {
 ## -- --- -- ##
 variable "availability_zone" {
   type        = string
-  default     = null
+  default     = "eu-west-1a"
   description = "The AZ zone to deploy resources to"
 }
 
