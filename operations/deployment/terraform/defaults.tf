@@ -65,7 +65,7 @@ data "aws_subnet" "defaultf" {
 
 locals {
   aws_ec2_instance_type_offerings = sort(data.aws_ec2_instance_type_offerings.region_azs.locations)
-  preferred_az = var.availability_zone != null ? var.availability_zone : local.aws_ec2_instance_type_offerings[random_integer.az_select.result]
+  preferred_az = var.availability_zone
 }
 
 data "aws_ec2_instance_type_offerings" "region_azs" {
