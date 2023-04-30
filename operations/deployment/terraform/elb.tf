@@ -40,8 +40,8 @@ resource "aws_elb" "vm_ssl" {
   count              = local.cert_available ? 1 : 0
   name               = var.aws_resource_identifier_supershort
   security_groups    = [aws_security_group.ec2_security_group.id]
-  availability_zones = [aws_instance.server.availability_zone]
-
+  #availability_zones = [aws_instance.server.availability_zone]
+  subnets            = [var.subnet_id]
   access_logs {
     bucket   = aws_s3_bucket.lb_access_logs.id
     interval = 60
