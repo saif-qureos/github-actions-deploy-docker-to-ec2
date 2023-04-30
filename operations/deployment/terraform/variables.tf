@@ -288,5 +288,5 @@ variable "vpc_id" {
 variable "subnet_id" {
   type        = string
   description = "Subnet-id to launch the instance into"
-  default     = "subnet-0f8e8d1312d4b9cc9"
+  default     = "subnet-089b77593738457d4"
 }
