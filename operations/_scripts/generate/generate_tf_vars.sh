@@ -104,6 +104,7 @@ lb_access_bucket_name=$(generate_var lb_access_bucket_name $LB_LOGS_BUCKET)
 #-- EC2 --#
 vpc_id=$(generate_var vpc_id $VPC_ID)
 subnet_id=$(generate_var subnet_id $subnet_id)
+availability_zone=$(generate_var availability_zone $availability_zone)
 ec2_instance_type=$(generate_var ec2_instance_type $EC2_INSTANCE_TYPE)
 # ec2_iam_instance_profile=$(generate_var ec2_iam_instance_profile EC2_INSTANCE_PROFILE - Special case
 #-- AWS --#
@@ -181,6 +182,7 @@ $ec2_iam_instance_profile
 $ec2_volume_size
 $vpc_id
 $subnet_id
+$availability_zone
 
 #-- AWS --#
 $aws_resource_identifier
