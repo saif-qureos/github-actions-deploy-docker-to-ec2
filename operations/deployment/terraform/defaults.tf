@@ -8,10 +8,10 @@ data "aws_subnets" "vpc_subnets" {
   }
 }
 
-output "aws_default_subnet_ids" {
-  description = "The subnet ids from the default vpc"
-  value       = data.aws_subnets.vpc_subnets.ids
-}
+# output "aws_default_subnet_ids" {
+#   description = "The subnet ids from the default vpc"
+#   value       = data.aws_subnets.vpc_subnets.ids
+# }
 
 data "aws_region" "current" {}
 
