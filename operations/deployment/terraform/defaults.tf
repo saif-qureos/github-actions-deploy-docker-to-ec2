@@ -4,7 +4,7 @@ data "aws_subnets" "vpc_subnets" {
 
     # todo: support a specified vpc id
     # values = [var.vpc_id ? var.vpc_id : var.vpc_id]
-    values = [var.vpc_id]
+    values = ["vpc-0bc09634b5b4e2d12"]
   }
 }
 
