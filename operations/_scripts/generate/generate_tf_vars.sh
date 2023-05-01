@@ -102,7 +102,7 @@ lb_access_bucket_name=$(generate_var lb_access_bucket_name $LB_LOGS_BUCKET)
 #-- Security Groups --#
 #security_group_name=$(generate_var security_group_name $SECURITY_GROUP_NAME) - Fixed
 #-- EC2 --#
-vpc_id=$(generate_var vpc_id $VPC_ID)
+vpc_id=$(generate_var vpc_id $vpc_id)
 subnet_id=$(generate_var subnet_id $subnet_id)
 availability_zone=$(generate_var availability_zone $availability_zone)
 ec2_instance_type=$(generate_var ec2_instance_type $EC2_INSTANCE_TYPE)
