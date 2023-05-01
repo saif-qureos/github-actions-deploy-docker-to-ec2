@@ -10,8 +10,8 @@ resource "local_file" "ansible_inventory" {
     ssh_keyfile              = local_sensitive_file.private_key.filename
     app_repo_name            = var.app_repo_name
     app_install_root         = var.app_install_root
-    mount_efs                = local.mount_efs
-    efs_url                  = local.efs_url
+    mount_efs                = false
+    efs_url                  = ""
     resource_identifier      = var.aws_resource_identifier
     application_mount_target = var.application_mount_target
     efs_mount_target         = var.efs_mount_target != null ? var.efs_mount_target : ""
