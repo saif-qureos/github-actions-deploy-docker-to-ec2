@@ -5,6 +5,7 @@
     build: yes
     recreate: always
     nocache: yes
+    timeout: 900
   register: output
 
 - ansible.builtin.debug:
